@@ -15,6 +15,7 @@
   --rule: #E0D7C9; --rule-strong: #CFC2AF;
   --accent: #BE5F3E; --accent-deep: #9C4A2E;
   --sage: #68794B; --sage-soft: #E4E9DC;
+  --glow: none; --chip: #EFE4D6;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -24,6 +25,8 @@
     --rule: #38312A; --rule-strong: #4B4239;
     --accent: #D97F5A; --accent-deep: #E5936F;
     --sage: #9FB07E; --sage-soft: #2C3324;
+    --glow: radial-gradient(640px 320px at 50% -80px, rgba(217,127,90,.14), transparent 70%);
+    --chip: #2E2820;
   }
 }
 :root[data-theme="dark"] {
@@ -33,13 +36,17 @@
   --rule: #38312A; --rule-strong: #4B4239;
   --accent: #D97F5A; --accent-deep: #E5936F;
   --sage: #9FB07E; --sage-soft: #2C3324;
+  --glow: radial-gradient(640px 320px at 50% -80px, rgba(217,127,90,.14), transparent 70%);
+  --chip: #2E2820;
 }
 * { box-sizing: border-box; margin: 0; }
 body {
   background: var(--ground); color: var(--ink-2);
+  background-image: var(--glow); background-repeat: no-repeat;
   font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 40px) 80px;
 }
+.ic { width: 16px; height: 16px; flex: none; }
 .wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 44px; }
 .mono { font-family: ui-monospace, "SF Mono", Menlo, Monaco, "Cascadia Mono", monospace; }
 .eyebrow {
@@ -64,17 +71,24 @@ h2 {
 .goal .k { font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent-deep); }
 .goal p { color: var(--ink); font-size: 15.5px; margin-top: 4px; }
 .strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.cell { background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 16px 18px; }
+.cell { background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 16px 18px; position: relative; }
+.cell > .ic { position: absolute; top: 15px; right: 15px; color: var(--accent-deep); opacity: .8; }
 .cell .k { font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-muted); }
 .cell .v { font-family: "Newsreader", ui-serif, Georgia, serif; font-size: 30px; font-weight: 600; color: var(--ink); margin-top: 2px; font-variant-numeric: tabular-nums; }
 .cell .n { font-size: 12.5px; color: var(--ink-muted); }
 section { display: grid; gap: 18px; border-top: 1px solid var(--rule); padding-top: 32px; }
-.sec-head { display: flex; align-items: baseline; gap: 14px; }
-.sec-head .num { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-deep); }
+.sec-head { display: flex; align-items: center; gap: 13px; }
+.sec-ic {
+  width: 34px; height: 34px; border-radius: 10px; flex: none;
+  display: grid; place-items: center; color: var(--accent-deep);
+  background: var(--chip); border: 1px solid var(--rule);
+}
+.sec-ic .ic { width: 18px; height: 18px; }
 .sec-intro { max-width: 62em; }
 .loop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .step { position: relative; background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 14px 14px 16px; display: grid; gap: 6px; align-content: start; }
-.step .when { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--accent-deep); text-transform: uppercase; letter-spacing: .08em; }
+.step .when { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--accent-deep); text-transform: uppercase; letter-spacing: .08em; display: flex; align-items: center; gap: 7px; }
+.step .when .ic { width: 15px; height: 15px; }
 .step .what { font-weight: 600; color: var(--ink); font-size: 14.5px; line-height: 1.35; }
 .step .how { font-size: 12.5px; color: var(--ink-muted); }
 .step.now { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
@@ -87,7 +101,8 @@ section { display: grid; gap: 18px; border-top: 1px solid var(--rule); padding-t
 .cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .card { background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 18px; display: grid; gap: 8px; align-content: start; }
 .card h3 { font-size: 15px; color: var(--ink); font-weight: 650; }
-.card .tag { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-muted); }
+.card .tag { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-muted); display: flex; align-items: center; gap: 7px; }
+.card .tag .ic { width: 14px; height: 14px; color: var(--accent-deep); }
 .card p { font-size: 13.5px; }
 .card .say {
   font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink);
@@ -163,57 +178,57 @@ a { color: var(--accent-deep); }
   </header>
 
   <div class="strip">
-    <div class="cell"><span class="k">Effort / week</span><div class="v">~20<span style="font-size:16px"> min</span></div><span class="n">including the event stories</span></div>
-    <div class="cell"><span class="k">Feed posts / week</span><div class="v">2</div><span class="n">Thursday poster + the mosaic photo</span></div>
-    <div class="cell"><span class="k">Stories / week</span><div class="v">3–5</div><span class="n">reminder + live from the spot</span></div>
-    <div class="cell"><span class="k">Budget</span><div class="v">€0</div><span class="n">no ads, no tools, ever</span></div>
+    <div class="cell"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="k">Effort / week</span><div class="v">~20<span style="font-size:16px"> min</span></div><span class="n">including the event stories</span></div>
+    <div class="cell"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span class="k">Feed posts / week</span><div class="v">2</div><span class="n">Thursday poster + the mosaic photo</span></div>
+    <div class="cell"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg><span class="k">Stories / week</span><div class="v">3–5</div><span class="n">reminder + live from the spot</span></div>
+    <div class="cell"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h12"/><path d="M4 14h9"/><path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2"/></svg><span class="k">Budget</span><div class="v">€0</div><span class="n">no ads, no tools, ever</span></div>
   </div>
 
   <section>
-    <div class="sec-head"><span class="num">01</span><h2>Where it happens</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span><h2>Where it happens</h2></div>
     <div class="cards3">
-      <div class="card"><span class="tag">The rotation</span><h3>A different spot each week</h3><p>Parks, kiosks, miradouros — Praça das Flores is home base, not the fixture. The Thursday poster names the week's spot; the Friday 17:00 story pins the exact point so newcomers can find the group.</p></div>
-      <div class="card"><span class="tag">Rain</span><h3>Relocate, don't cancel</h3><p>Wet Friday → Mercado de Campo de Ourique, Time Out Market, or 8 Marvila. Call it in the Friday 12:00 story at the latest.</p></div>
-      <div class="card"><span class="tag">Geotag</span><h3>Tag the real spot, every time</h3><p>The location tag on every post and story is the week's actual venue. Bio says: "this week's spot is on the latest poster."</p></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.8-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/></svg>The rotation</span><h3>A different spot each week</h3><p>Parks, kiosks, miradouros — Praça das Flores is home base, not the fixture. The Thursday poster names the week's spot; the Friday 17:00 story pins the exact point so newcomers can find the group.</p></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/></svg>Rain</span><h3>Relocate, don't cancel</h3><p>Wet Friday → Mercado de Campo de Ourique, Time Out Market, or 8 Marvila. Call it in the Friday 12:00 story at the latest.</p></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Geotag</span><h3>Tag the real spot, every time</h3><p>The location tag on every post and story is the week's actual venue. Bio says: "this week's spot is on the latest poster."</p></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">02</span><h2>The weekly loop</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg></span><h2>The weekly loop</h2></div>
     <p class="sec-intro">Six touches, always the same. No Monday recap, no midweek filler — the monthly reel, the weekly outreach DM, and the bridge month are the only standing exceptions.</p>
     <div class="loop">
-      <div class="step" data-day="thu"><span class="when">Thu · 18:00</span><span class="what">Poster to the feed</span><span class="how">Share it to the story too. The facts stay fixed (tomorrow, 17:00, the week's spot); the fun line rotates — "bring a cool friend", never event-admin speak. Plus the on-this-day fact. Ezri delivers everything by 16:00.</span></div>
-      <div class="step" data-day="fri-noon"><span class="when">Fri · 12:00</span><span class="what">Reminder story</span><span class="how">The poster again, with the location sticker and a countdown sticker ending Friday 17:00. If rain relocates, this story announces the indoor spot.</span></div>
-      <div class="step" data-day="fri-event"><span class="when">Fri · 17:00–19:00</span><span class="what">2–3 live stories</span><span class="how">The first, at 17:00, shows the exact spot — it matters more now that the venue rotates. Later: a wide shot, a detail. Location tag on every one; consent-cleared frames go to the "Fridays" highlight.</span></div>
-      <div class="step" data-day="fri-close"><span class="when">Fri · ~18:30</span><span class="what">Tag, then one mild ask</span><span class="how">@mention everyone who opted in — Instagram DMs them the story with a one-tap "Add to your story" button. The ask is one line: "I'll tag you — repost if it feels right."</span></div>
-      <div class="step" data-day="weekend"><span class="when">Weekend</span><span class="what">The mosaic photo</span><span class="how">One best photo from Friday to the feed; extra shots ride along as a carousel. The grid alternates poster / photo and reads as a mosaic within weeks.</span></div>
-      <div class="step" data-day="any"><span class="when">When a mention lands</span><span class="what">Reshare it</span><span class="how">Every eligible public mention, same day — private accounts and expired stories can't be reshared.</span></div>
+      <div class="step" data-day="thu"><span class="when"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>Thu · 18:00</span><span class="what">Poster to the feed</span><span class="how">Share it to the story too. The facts stay fixed (tomorrow, 17:00, the week's spot); the fun line rotates — "bring a cool friend", never event-admin speak. Plus the on-this-day fact. Ezri delivers everything by 16:00.</span></div>
+      <div class="step" data-day="fri-noon"><span class="when"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Fri · 12:00</span><span class="what">Reminder story</span><span class="how">The poster again, with the location sticker and a countdown sticker ending Friday 17:00. If rain relocates, this story announces the indoor spot.</span></div>
+      <div class="step" data-day="fri-event"><span class="when"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>Fri · 17:00–19:00</span><span class="what">2–3 live stories</span><span class="how">The first, at 17:00, shows the exact spot — it matters more now that the venue rotates. Later: a wide shot, a detail. Location tag on every one; consent-cleared frames go to the "Fridays" highlight.</span></div>
+      <div class="step" data-day="fri-close"><span class="when"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>Fri · ~18:30</span><span class="what">Tag, then one mild ask</span><span class="how">@mention everyone who opted in — Instagram DMs them the story with a one-tap "Add to your story" button. The ask is one line: "I'll tag you — repost if it feels right."</span></div>
+      <div class="step" data-day="weekend"><span class="when"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Weekend</span><span class="what">The mosaic photo</span><span class="how">One best photo from Friday to the feed; extra shots ride along as a carousel. The grid alternates poster / photo and reads as a mosaic within weeks.</span></div>
+      <div class="step" data-day="any"><span class="when"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 3-3 3 3"/><path d="M13 18H7a2 2 0 0 1-2-2V6"/><path d="m22 15-3 3-3-3"/><path d="M11 6h6a2 2 0 0 1 2 2v10"/></svg>When a mention lands</span><span class="what">Reshare it</span><span class="how">Every eligible public mention, same day — private accounts and expired stories can't be reshared.</span></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">03</span><h2>What goes where</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span><h2>What goes where</h2></div>
     <div class="cards2">
-      <div class="card sage-top"><span class="tag">Feed</span><h3>The mosaic grid</h3><p>Two posts a week — Thursday poster, weekend photo — alternating into a mosaic. Keep one poster template so the grid has rhythm. The pinned intro card states the time, "spot announced every Thursday", drinks are BYO or from a nearby kiosk, bring a cool friend.</p></div>
-      <div class="card sage-top"><span class="tag">Film drops</span><h3>35mm, weeks late, on purpose</h3><p>Lucian shoots analog; scans arrive weeks later. Post them as an occasional carousel ("35mm · [venue] · [month]"). The delay is a feature — it proves the tradition has depth, and no other local account has the look.</p></div>
-      <div class="card sage-top"><span class="tag">Stories</span><h3>Logistics and live atmosphere</h3><p>Reminders, countdowns, golden hour at the spot. Ephemeral lowers the effort bar and feed permanence — not the consent bar. The "Fridays" highlight is permanent, so only consent-cleared frames land there.</p></div>
-      <div class="card sage-top"><span class="tag">Reels · confirmed 2026-08-28</span><h3>One a month, only if it's free</h3><p>If a good ten-second sunset-crowd clip already exists: pick, crop, post with the location tag, under five minutes. No produced edit, no trending-audio chase. See the decision below for why.</p></div>
+      <div class="card sage-top"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>Feed</span><h3>The mosaic grid</h3><p>Two posts a week — Thursday poster, weekend photo — alternating into a mosaic. Keep one poster template so the grid has rhythm. The pinned intro card states the time, "spot announced every Thursday", drinks are BYO or from a nearby kiosk, bring a cool friend.</p></div>
+      <div class="card sage-top"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18"/><path d="M17 3v18"/><path d="M3 7.5h4"/><path d="M3 16.5h4"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/><path d="M3 12h18"/></svg>Film drops</span><h3>35mm, weeks late, on purpose</h3><p>Lucian shoots analog; scans arrive weeks later. Post them as an occasional carousel ("35mm · [venue] · [month]"). The delay is a feature — it proves the tradition has depth, and no other local account has the look.</p></div>
+      <div class="card sage-top"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>Stories</span><h3>Logistics and live atmosphere</h3><p>Reminders, countdowns, golden hour at the spot. Ephemeral lowers the effort bar and feed permanence — not the consent bar. The "Fridays" highlight is permanent, so only consent-cleared frames land there.</p></div>
+      <div class="card sage-top"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>Reels · confirmed 2026-08-28</span><h3>One a month, only if it's free</h3><p>If a good ten-second sunset-crowd clip already exists: pick, crop, post with the location tag, under five minutes. No produced edit, no trending-audio chase. See the decision below for why.</p></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">04</span><h2>Photos without the awkwardness</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><h2>Photos without the awkwardness</h2></div>
     <p class="sec-intro">Attendees are private people at a casual drink. The rule set keeps faces safe without a single vibe-killing conversation.</p>
     <div class="cards2">
-      <div class="card"><span class="tag">Default</span><h3>Faceless by design</h3><p>Backs, hands, glasses, wide shots from behind, the spot itself. No consent needed, and it photographs better than posed groups anyway.</p></div>
-      <div class="card"><span class="tag">Once per event</span><h3>The blanket heads-up</h3><p>Said casually, once:</p><div class="say">"I take a couple of pics for the Instagram — wave me off if you'd rather stay out."</div></div>
-      <div class="card"><span class="tag">Faces</span><h3>Ask in the moment</h3><p>One sentence, and @mention whoever opts in — the mention is also what powers the one-tap repost. A photo tag doesn't do that.</p><div class="say">"Posting a story for the account — you in or out?"</div></div>
-      <div class="card"><span class="tag">Group shots</span><h3>Opting out is a joke, not a form</h3><p>Announce it loudly, make hiding the fun part, and check the frame before posting. Codex calls this opt-out rather than opt-in — open question below.</p><div class="say">"Group photo for the Instagram! Duck or hide your face if you're skipping work!"</div></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><path d="m2 2 20 20"/></svg>Default</span><h3>Faceless by design</h3><p>Backs, hands, glasses, wide shots from behind, the spot itself. No consent needed, and it photographs better than posed groups anyway.</p></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Once per event</span><h3>The blanket heads-up</h3><p>Said casually, once:</p><div class="say">"I take a couple of pics for the Instagram — wave me off if you'd rather stay out."</div></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/></svg>Faces</span><h3>Ask in the moment</h3><p>One sentence, and @mention whoever opts in — the mention is also what powers the one-tap repost. A photo tag doesn't do that.</p><div class="say">"Posting a story for the account — you in or out?"</div></div>
+      <div class="card"><span class="tag"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Group shots</span><h3>Opting out is a joke, not a form</h3><p>Announce it loudly, make hiding the fun part, and check the frame before posting. Codex calls this opt-out rather than opt-in — open question below.</p><div class="say">"Group photo for the Instagram! Duck or hide your face if you're skipping work!"</div></div>
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">05</span><h2>How it grows from zero</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><h2>How it grows from zero</h2></div>
     <div class="growth">
       <div class="g-row engine"><div><div class="t">The tag-to-repost loop</div><p>Friends don't post their own stories — so don't ask them to. A story @mention DMs each opted-in attendee the story with a one-tap "Add to your story" button. Every repost reaches a few hundred warm Lisbon locals. This is 80% of the growth, and it costs the attendee a single tap.</p></div></div>
       <div class="g-row"><div><div class="t">Hyper-local geotag, every time</div><p>Location-tag the week's actual venue on every post and story. Hashtags on feed posts only, always with the archive tag: <span class="mono">#lisbonfridaydrinks</span> plus the venue and neighborhood tags — never broad #lisbon spam. Bio points at the latest poster for this week's spot.</p></div></div>
@@ -224,7 +239,7 @@ a { color: var(--accent-deep); }
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">06</span><h2>Deliberately not doing</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg></span><h2>Deliberately not doing</h2></div>
     <div class="skip">
       <div class="row"><span class="x">✕</span><p><b>Weekly reels, editing, trending audio.</b> Reels reward volume and production; the return per minute at a 2–8 person meetup is terrible.</p></div>
       <div class="row"><span class="x">✕</span><p><b>Follow-for-follow, pods, bought followers.</b> Inflated numbers with zero attendance value — it poisons the local signal.</p></div>
@@ -234,7 +249,7 @@ a { color: var(--accent-deep); }
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">07</span><h2>The one contested call: reels</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span><h2>The one contested call: reels</h2></div>
     <p class="sec-intro">The council split exactly once. Both positions, and what settles it, side by side.</p>
     <div class="cards2">
       <div class="card chosen"><span class="verdict">Chosen · confirmed by Lucian 2026-08-28</span><h3>Skip the reels grind; ride reposts</h3><p>At this scale, warm reposts from real attendees beat cold algorithmic reach. The effort budget stays intact, and the routine survives every busy week. Exception: one zero-effort reel a month.</p></div>
@@ -251,7 +266,7 @@ a { color: var(--accent-deep); }
   </section>
 
   <section>
-    <div class="sec-head"><span class="num">08</span><h2>How we got here, what happens next</h2></div>
+    <div class="sec-head"><span class="sec-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg></span><h2>How we got here, what happens next</h2></div>
     <div class="tl">
       <div class="row"><span class="when">2024–2025</span><div class="rail"><div class="dot"></div></div><div class="body"><b>A friend starts the tradition.</b> Friday after-work drinks at Praça das Flores; it runs for a stretch, then fades.</div></div>
       <div class="row"><span class="when">mid-2026</span><div class="rail"><div class="dot"></div></div><div class="body"><b>Lucian reinstates it.</b> Weekly AI poster + a message in two friend groups. Turnout: 2 to 8.</div></div>
