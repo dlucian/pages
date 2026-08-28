@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lisbon Friday Drinks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --ground: #F6F2EB; --raised: #FFFEFB; --sunken: #F0EADF;
+  --ink: #2D2823; --ink-2: #4C443C; --ink-muted: #6E655B;
+  --rule: #E0D7C9; --rule-strong: #CFC2AF;
+  --accent: #BE5F3E; --accent-deep: #9C4A2E;
+  --sage: #68794B; --sage-soft: #E4E9DC;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #17140F; --raised: #201C16; --sunken: #262019;
+    --ink: #EFE7DA; --ink-2: #D6CCBD; --ink-muted: #A2978A;
+    --rule: #38312A; --rule-strong: #4B4239;
+    --accent: #D97F5A; --accent-deep: #E5936F;
+    --sage: #9FB07E; --sage-soft: #2C3324;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #17140F; --raised: #201C16; --sunken: #262019;
+  --ink: #EFE7DA; --ink-2: #D6CCBD; --ink-muted: #A2978A;
+  --rule: #38312A; --rule-strong: #4B4239;
+  --accent: #D97F5A; --accent-deep: #E5936F;
+  --sage: #9FB07E; --sage-soft: #2C3324;
+}
+* { box-sizing: border-box; margin: 0; }
+body {
+  background: var(--ground); color: var(--ink-2);
+  font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 40px) 80px;
+}
+.wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 44px; }
+.mono { font-family: ui-monospace, "SF Mono", Menlo, Monaco, "Cascadia Mono", monospace; }
+.eyebrow {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px;
+  text-transform: uppercase; letter-spacing: .14em; color: var(--ink-muted);
+}
+h1 {
+  font-family: "Newsreader", ui-serif, Georgia, serif;
+  font-size: clamp(34px, 5vw, 50px); font-weight: 600; color: var(--ink);
+  line-height: 1.08; text-wrap: balance; margin-top: 10px;
+}
+h2 {
+  font-family: "Newsreader", ui-serif, Georgia, serif;
+  font-size: clamp(22px, 3vw, 28px); font-weight: 600; color: var(--ink);
+  text-wrap: balance;
+}
+.lead { font-size: 17px; max-width: 46em; margin-top: 14px; }
+.goal {
+  margin-top: 22px; background: var(--sunken); border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0; padding: 14px 18px; max-width: 56em;
+}
+.goal .k { font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--accent-deep); }
+.goal p { color: var(--ink); font-size: 15.5px; margin-top: 4px; }
+.strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.cell { background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 16px 18px; }
+.cell .k { font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-muted); }
+.cell .v { font-family: "Newsreader", ui-serif, Georgia, serif; font-size: 30px; font-weight: 600; color: var(--ink); margin-top: 2px; font-variant-numeric: tabular-nums; }
+.cell .n { font-size: 12.5px; color: var(--ink-muted); }
+section { display: grid; gap: 18px; border-top: 1px solid var(--rule); padding-top: 32px; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; }
+.sec-head .num { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: var(--accent-deep); }
+.sec-intro { max-width: 62em; }
+.loop { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.step { position: relative; background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 14px 14px 16px; display: grid; gap: 6px; align-content: start; }
+.step .when { font-family: ui-monospace, Menlo, monospace; font-size: 11.5px; color: var(--accent-deep); text-transform: uppercase; letter-spacing: .08em; }
+.step .what { font-weight: 600; color: var(--ink); font-size: 14.5px; line-height: 1.35; }
+.step .how { font-size: 12.5px; color: var(--ink-muted); }
+.step.now { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.step.now::after {
+  content: "you are here"; position: absolute; top: -9px; right: 10px;
+  font-family: ui-monospace, Menlo, monospace; font-size: 10px; letter-spacing: .08em;
+  background: var(--accent); color: var(--ground); border-radius: 99px; padding: 2px 8px;
+}
+.cards2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.cards3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 18px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 15px; color: var(--ink); font-weight: 650; }
+.card .tag { font-family: ui-monospace, Menlo, monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-muted); }
+.card p { font-size: 13.5px; }
+.card .say {
+  font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink);
+  background: var(--sunken); border-radius: 8px; padding: 8px 10px; line-height: 1.5;
+}
+.card.sage-top { border-top: 3px solid var(--sage); }
+.card.chosen { border-top: 3px solid var(--accent); }
+.card.chosen .verdict { color: var(--accent-deep); }
+.card .verdict { font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; color: var(--ink-muted); }
+.growth { counter-reset: g; display: grid; gap: 10px; }
+.g-row { counter-increment: g; display: grid; grid-template-columns: 44px 1fr; gap: 14px; background: var(--raised); border: 1.5px solid var(--rule); border-radius: 14px; padding: 16px 18px; }
+.g-row::before {
+  content: counter(g, decimal-leading-zero); font-family: ui-monospace, Menlo, monospace;
+  font-size: 15px; color: var(--accent-deep); padding-top: 2px;
+}
+.g-row .t { font-weight: 650; color: var(--ink); font-size: 14.5px; }
+.g-row p { font-size: 13.5px; }
+.g-row.engine { border-color: var(--rule-strong); background: var(--sage-soft); }
+.g-row.engine .t::after {
+  content: "the engine"; font-family: ui-monospace, Menlo, monospace; font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--sage);
+  border: 1px solid var(--sage); border-radius: 99px; padding: 1px 8px; margin-left: 10px;
+  position: relative; top: -2px;
+}
+.g-row.reserve { border-style: dashed; background: var(--sunken); }
+.g-row.reserve .t::after {
+  content: "held in reserve"; font-family: ui-monospace, Menlo, monospace; font-size: 10px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--ink-muted);
+  border: 1px solid var(--rule-strong); border-radius: 99px; padding: 1px 8px; margin-left: 10px;
+  position: relative; top: -2px;
+}
+.skip { display: grid; gap: 8px; }
+.skip .row { display: grid; grid-template-columns: 20px 1fr; gap: 12px; padding: 10px 4px; border-bottom: 1px dashed var(--rule); }
+.skip .row:last-child { border-bottom: 0; }
+.skip .x { color: var(--accent-deep); font-weight: 700; }
+.skip b { color: var(--ink); font-weight: 650; }
+.trigger { background: var(--sunken); border: 1.5px solid var(--rule-strong); border-radius: 14px; padding: 16px 18px; max-width: 62em; }
+.trigger .k { font-family: ui-monospace, Menlo, monospace; font-size: 11px; text-transform: uppercase; letter-spacing: .14em; color: var(--sage); }
+.trigger p { margin-top: 4px; font-size: 14px; color: var(--ink-2); }
+.tl { display: grid; gap: 0; }
+.tl .row { display: grid; grid-template-columns: 118px 22px 1fr; gap: 0 10px; }
+.tl .when { font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--ink-muted); padding-top: 2px; text-align: right; font-variant-numeric: tabular-nums; }
+.tl .rail { position: relative; }
+.tl .rail::before { content: ""; position: absolute; left: 50%; top: 4px; bottom: -4px; width: 2px; background: var(--rule); transform: translateX(-50%); }
+.tl .row:last-child .rail::before { bottom: auto; height: 14px; }
+.tl .dot { position: relative; z-index: 1; width: 10px; height: 10px; border-radius: 50%; background: var(--rule-strong); margin: 5px auto 0; }
+.tl .row.hot .dot { background: var(--accent); }
+.tl .body { padding-bottom: 20px; font-size: 13.5px; }
+.tl .body b { color: var(--ink); font-weight: 650; }
+.foot { border-top: 1px solid var(--rule); padding-top: 20px; font-size: 12.5px; color: var(--ink-muted); }
+a { color: var(--accent-deep); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (max-width: 860px) {
+  .strip { grid-template-columns: 1fr 1fr; }
+  .loop { grid-template-columns: 1fr; }
+  .cards2, .cards3 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Strategy · @lisbonfridaydrinks · council + codex reviewed · updated 2026-08-28</div>
+    <h1>Lisbon Friday Drinks</h1>
+    <p class="lead">Every Friday, 17:00 to 19:00, somewhere good in Lisbon — a park, a kiosk, a miradouro. The Thursday poster names the spot. Free, open, bring a cool friend. This page is the whole Instagram playbook: one loop, repeated weekly, in about twenty minutes.</p>
+    <div class="goal">
+      <span class="k">Goal</span>
+      <p>Give the tradition a public home, so weekly promotion leaves the two group chats — and friends bring friends. Deliberately cozy: there's a lever for scale (see growth), and it stays unpulled.</p>
+    </div>
+  </header>
+
+  <div class="strip">
+    <div class="cell"><span class="k">Effort / week</span><div class="v">~20<span style="font-size:16px"> min</span></div><span class="n">including the event stories</span></div>
+    <div class="cell"><span class="k">Feed posts / week</span><div class="v">2</div><span class="n">Thursday poster + the mosaic photo</span></div>
+    <div class="cell"><span class="k">Stories / week</span><div class="v">3–5</div><span class="n">reminder + live from the spot</span></div>
+    <div class="cell"><span class="k">Budget</span><div class="v">€0</div><span class="n">no ads, no tools, ever</span></div>
+  </div>
+
+  <section>
+    <div class="sec-head"><span class="num">01</span><h2>Where it happens</h2></div>
+    <div class="cards3">
+      <div class="card"><span class="tag">The rotation</span><h3>A different spot each week</h3><p>Parks, kiosks, miradouros — Praça das Flores is home base, not the fixture. The Thursday poster names the week's spot; the Friday 17:00 story pins the exact point so newcomers can find the group.</p></div>
+      <div class="card"><span class="tag">Rain</span><h3>Relocate, don't cancel</h3><p>Wet Friday → Mercado de Campo de Ourique, Time Out Market, or 8 Marvila. Call it in the Friday 12:00 story at the latest.</p></div>
+      <div class="card"><span class="tag">Geotag</span><h3>Tag the real spot, every time</h3><p>The location tag on every post and story is the week's actual venue. Bio says: "this week's spot is on the latest poster."</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">02</span><h2>The weekly loop</h2></div>
+    <p class="sec-intro">Six touches, always the same. No Monday recap, no midweek filler — the monthly reel, the weekly outreach DM, and the bridge month are the only standing exceptions.</p>
+    <div class="loop">
+      <div class="step" data-day="thu"><span class="when">Thu · 18:00</span><span class="what">Poster to the feed</span><span class="how">Share it to the story too. The facts stay fixed (tomorrow, 17:00, the week's spot); the fun line rotates — "bring a cool friend", never event-admin speak. Plus the on-this-day fact. Ezri delivers everything by 16:00.</span></div>
+      <div class="step" data-day="fri-noon"><span class="when">Fri · 12:00</span><span class="what">Reminder story</span><span class="how">The poster again, with the location sticker and a countdown sticker ending Friday 17:00. If rain relocates, this story announces the indoor spot.</span></div>
+      <div class="step" data-day="fri-event"><span class="when">Fri · 17:00–19:00</span><span class="what">2–3 live stories</span><span class="how">The first, at 17:00, shows the exact spot — it matters more now that the venue rotates. Later: a wide shot, a detail. Location tag on every one; consent-cleared frames go to the "Fridays" highlight.</span></div>
+      <div class="step" data-day="fri-close"><span class="when">Fri · ~18:30</span><span class="what">Tag, then one mild ask</span><span class="how">@mention everyone who opted in — Instagram DMs them the story with a one-tap "Add to your story" button. The ask is one line: "I'll tag you — repost if it feels right."</span></div>
+      <div class="step" data-day="weekend"><span class="when">Weekend</span><span class="what">The mosaic photo</span><span class="how">One best photo from Friday to the feed; extra shots ride along as a carousel. The grid alternates poster / photo and reads as a mosaic within weeks.</span></div>
+      <div class="step" data-day="any"><span class="when">When a mention lands</span><span class="what">Reshare it</span><span class="how">Every eligible public mention, same day — private accounts and expired stories can't be reshared.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">03</span><h2>What goes where</h2></div>
+    <div class="cards2">
+      <div class="card sage-top"><span class="tag">Feed</span><h3>The mosaic grid</h3><p>Two posts a week — Thursday poster, weekend photo — alternating into a mosaic. Keep one poster template so the grid has rhythm. The pinned intro card states the time, "spot announced every Thursday", drinks are BYO or from a nearby kiosk, bring a cool friend.</p></div>
+      <div class="card sage-top"><span class="tag">Film drops</span><h3>35mm, weeks late, on purpose</h3><p>Lucian shoots analog; scans arrive weeks later. Post them as an occasional carousel ("35mm · [venue] · [month]"). The delay is a feature — it proves the tradition has depth, and no other local account has the look.</p></div>
+      <div class="card sage-top"><span class="tag">Stories</span><h3>Logistics and live atmosphere</h3><p>Reminders, countdowns, golden hour at the spot. Ephemeral lowers the effort bar and feed permanence — not the consent bar. The "Fridays" highlight is permanent, so only consent-cleared frames land there.</p></div>
+      <div class="card sage-top"><span class="tag">Reels · confirmed 2026-08-28</span><h3>One a month, only if it's free</h3><p>If a good ten-second sunset-crowd clip already exists: pick, crop, post with the location tag, under five minutes. No produced edit, no trending-audio chase. See the decision below for why.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">04</span><h2>Photos without the awkwardness</h2></div>
+    <p class="sec-intro">Attendees are private people at a casual drink. The rule set keeps faces safe without a single vibe-killing conversation.</p>
+    <div class="cards2">
+      <div class="card"><span class="tag">Default</span><h3>Faceless by design</h3><p>Backs, hands, glasses, wide shots from behind, the spot itself. No consent needed, and it photographs better than posed groups anyway.</p></div>
+      <div class="card"><span class="tag">Once per event</span><h3>The blanket heads-up</h3><p>Said casually, once:</p><div class="say">"I take a couple of pics for the Instagram — wave me off if you'd rather stay out."</div></div>
+      <div class="card"><span class="tag">Faces</span><h3>Ask in the moment</h3><p>One sentence, and @mention whoever opts in — the mention is also what powers the one-tap repost. A photo tag doesn't do that.</p><div class="say">"Posting a story for the account — you in or out?"</div></div>
+      <div class="card"><span class="tag">Group shots</span><h3>Opting out is a joke, not a form</h3><p>Announce it loudly, make hiding the fun part, and check the frame before posting. Codex calls this opt-out rather than opt-in — open question below.</p><div class="say">"Group photo for the Instagram! Duck or hide your face if you're skipping work!"</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">05</span><h2>How it grows from zero</h2></div>
+    <div class="growth">
+      <div class="g-row engine"><div><div class="t">The tag-to-repost loop</div><p>Friends don't post their own stories — so don't ask them to. A story @mention DMs each opted-in attendee the story with a one-tap "Add to your story" button. Every repost reaches a few hundred warm Lisbon locals. This is 80% of the growth, and it costs the attendee a single tap.</p></div></div>
+      <div class="g-row"><div><div class="t">Hyper-local geotag, every time</div><p>Location-tag the week's actual venue on every post and story. Hashtags on feed posts only, always with the archive tag: <span class="mono">#lisbonfridaydrinks</span> plus the venue and neighborhood tags — never broad #lisbon spam. Bio points at the latest poster for this week's spot.</p></div></div>
+      <div class="g-row"><div><div class="t">One DM a week to a Lisbon community account</div><p>Expat pages, event aggregators, neighborhood accounts: "free weekly open drinks, every Friday, feel free to share." One acceptance from a 10k-follower local page outweighs a year of hashtags. Also tag the kiosk that genuinely appears in a shot — local businesses reshare local content.</p></div></div>
+      <div class="g-row"><div><div class="t">The bridge month</div><p>Keep posting in the two chat groups for about four more weeks — "we're on IG now, follow @lisbonfridaydrinks and share this week's poster" — plus one direct, personal ask to each regular. The account announcement landed in both groups 2026-08-28; 15 followers on day one.</p></div></div>
+      <div class="g-row reserve"><div><div class="t">Olivia</div><p>Former organizer of Lisbon Digital Nomads — can bring a crowd on demand. Deliberately unpulled: the goal is cozy and friendly, not big. Revisit only if Lucian decides the tradition wants scale.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">06</span><h2>Deliberately not doing</h2></div>
+    <div class="skip">
+      <div class="row"><span class="x">✕</span><p><b>Weekly reels, editing, trending audio.</b> Reels reward volume and production; the return per minute at a 2–8 person meetup is terrible.</p></div>
+      <div class="row"><span class="x">✕</span><p><b>Follow-for-follow, pods, bought followers.</b> Inflated numbers with zero attendance value — it poisons the local signal.</p></div>
+      <div class="row"><span class="x">✕</span><p><b>Polls, Q&amp;As, engagement content.</b> With no audience there is nobody to engage. The event earns the audience first.</p></div>
+      <div class="row"><span class="x">✕</span><p><b>Brand voice.</b> No "link in bio to register", no formal event copy. The register is: "I'm drinking a beer at this fountain, come stand near me."</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">07</span><h2>The one contested call: reels</h2></div>
+    <p class="sec-intro">The council split exactly once. Both positions, and what settles it, side by side.</p>
+    <div class="cards2">
+      <div class="card chosen"><span class="verdict">Chosen · confirmed by Lucian 2026-08-28</span><h3>Skip the reels grind; ride reposts</h3><p>At this scale, warm reposts from real attendees beat cold algorithmic reach. The effort budget stays intact, and the routine survives every busy week. Exception: one zero-effort reel a month.</p></div>
+      <div class="card"><span class="verdict">Rejected · Gemini's position</span><h3>Weekly 5-second reels as the discovery engine</h3><p>True that only reels reach non-followers — but weekly production breaks the effort budget, and a local recurring event converts through friends-of-friends, not strangers scrolling.</p></div>
+    </div>
+    <div class="trigger">
+      <span class="k">Review trigger · week of 2026-10-22</span>
+      <p>If eight events produce fewer than ~4 attendee reposts total, first rule out the mundane causes (private accounts, an unclear ask, mention settings). Only then treat it as an event-shareability problem — and the counter-move is physical, not digital: a small flag at the spot that makes strangers walk over. Instagram then documents the growth instead of driving it.</p>
+    </div>
+    <div class="cards2">
+      <div class="card"><span class="tag">Open · group shots</span><h3>Keep duck-or-hide, or go opt-in?</h3><p>Codex flags the game as opt-out consent. Alternative: "step into the frame if you want in" — safer, slightly less fun. Either way the frame gets checked before posting.</p></div>
+      <div class="card"><span class="tag">Resolved · rain policy</span><h3>Relocation, not cancellation</h3><p>Settled 2026-08-28: a wet Friday moves indoors — Mercado de Campo de Ourique, Time Out Market, or 8 Marvila — announced in the Friday 12:00 story.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="num">08</span><h2>How we got here, what happens next</h2></div>
+    <div class="tl">
+      <div class="row"><span class="when">2024–2025</span><div class="rail"><div class="dot"></div></div><div class="body"><b>A friend starts the tradition.</b> Friday after-work drinks at Praça das Flores; it runs for a stretch, then fades.</div></div>
+      <div class="row"><span class="when">mid-2026</span><div class="rail"><div class="dot"></div></div><div class="body"><b>Lucian reinstates it.</b> Weekly AI poster + a message in two friend groups. Turnout: 2 to 8.</div></div>
+      <div class="row"><span class="when">2026-08-27</span><div class="rail"><div class="dot"></div></div><div class="body"><b>@lisbonfridaydrinks created; council + codex review the strategy.</b> Three frontier models, clean consensus on the loop, one fault line on reels.</div></div>
+      <div class="row hot"><span class="when">2026-08-28</span><div class="rail"><div class="dot"></div></div><div class="body"><b>First invite posted — 15 followers on day one.</b> Lucian's notes folded: rotating venues, the tag-to-repost loop, the mosaic grid, film drops, monthly reel confirmed, rain policy settled.</div></div>
+      <div class="row"><span class="when">2026-09-03</span><div class="rail"><div class="dot"></div></div><div class="body"><b>Ezri takes over the poster.</b> Delivered on Telegram every Thursday by 16:00: 4:5 feed asset, 9:16 story asset, caption with the week's spot, the on-this-day fact verified or dropped, a weather line with the indoor call when Friday looks wet.</div></div>
+      <div class="row"><span class="when">2026-10-22</span><div class="rail"><div class="dot"></div></div><div class="body"><b>Eight-week review.</b> Fewer than ~4 attendee reposts → rule out the mundane causes, then buy a flag.</div></div>
+    </div>
+  </section>
+
+  <p class="foot">Council: ezri-council, 2026-08-27, three answers ($0.15). Codex adversarial review same day: 25 findings, 23 folded. Lucian's notes folded 2026-08-28. Full text in <span class="mono">projects/lisbonfridaydrinks/strategy.md</span>. This page redeploys in place as the plan evolves.</p>
+</div>
+
+<script>
+(function () {
+  try {
+    var now = new Date();
+    var day = now.getDay(); // 0 Sun … 5 Fri, 6 Sat
+    var h = now.getHours();
+    var key = null;
+    if (day === 4 && h >= 12) key = "thu";
+    else if (day === 5 && h < 12) key = "fri-noon";
+    else if (day === 5 && h < 18) key = "fri-event";
+    else if (day === 5 && h < 20) key = "fri-close";
+    else if (day === 5 || day === 6 || day === 0) key = "weekend";
+    if (key) {
+      var el = document.querySelector('.step[data-day="' + key + '"]');
+      if (el) el.classList.add("now");
+    }
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>
