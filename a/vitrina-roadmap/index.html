@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Vitrina Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;0,800;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --purple: #6d28d9;
+    --purple-deep: #4c1d95;
+    --ink: #221a33;
+    --ink-soft: #564b6e;
+    --ink-faint: #8b81a3;
+    --paper: #faf9fc;
+    --card: #ffffff;
+    --lavender: #ede9f8;
+    --lavender-line: #ddd5ee;
+    --line: #e6e1f0;
+    --good: #15803d;
+    --good-bg: #e8f5ec;
+    --later: #b45309;
+    --later-bg: #fbf1e2;
+    --no: #b91c1c;
+    --no-bg: #fbeaea;
+    --chip-on: #6d28d9;
+    --chip-on-text: #ffffff;
+    --shadow: 0 1px 2px rgba(34,26,51,.05), 0 8px 24px -12px rgba(77,29,149,.18);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --purple: #a78bfa;
+      --purple-deep: #c4b5fd;
+      --ink: #ece8f6;
+      --ink-soft: #b3a9cc;
+      --ink-faint: #7d7398;
+      --paper: #17111f;
+      --card: #201a2c;
+      --lavender: #2a2139;
+      --lavender-line: #3a2f52;
+      --line: #322a45;
+      --good: #4ade80;
+      --good-bg: #17301f;
+      --later: #fbbf24;
+      --later-bg: #33270f;
+      --no: #f87171;
+      --no-bg: #351616;
+      --chip-on: #7c3aed;
+      --chip-on-text: #f4f0ff;
+      --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --purple: #a78bfa;
+    --purple-deep: #c4b5fd;
+    --ink: #ece8f6;
+    --ink-soft: #b3a9cc;
+    --ink-faint: #7d7398;
+    --paper: #17111f;
+    --card: #201a2c;
+    --lavender: #2a2139;
+    --lavender-line: #3a2f52;
+    --line: #322a45;
+    --good: #4ade80;
+    --good-bg: #17301f;
+    --later: #fbbf24;
+    --later-bg: #33270f;
+    --no: #f87171;
+    --no-bg: #351616;
+    --chip-on: #7c3aed;
+    --chip-on-text: #f4f0ff;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px 96px; }
+
+  h1, h2, h3 { font-family: Alegreya, Georgia, serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(2.4rem, 6vw, 3.6rem); font-weight: 800; line-height: 1.08; letter-spacing: -.01em; }
+  h2 { font-size: 1.9rem; font-weight: 700; }
+  h3 { font-size: 1.28rem; font-weight: 700; }
+  p { margin: 0; }
+
+  .eyebrow {
+    font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--purple);
+  }
+
+  /* ---------- hero ---------- */
+  header { padding: 72px 0 20px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  @media (max-width: 820px) { .hero-grid { grid-template-columns: 1fr; } }
+  .hero-copy { display: flex; flex-direction: column; gap: 18px; }
+  .hero-copy p.lede { font-size: 1.12rem; color: var(--ink-soft); max-width: 34em; }
+  .hero-copy .thesis { font-family: Alegreya, Georgia, serif; font-style: italic; font-size: 1.3rem; color: var(--ink); border-left: 3px solid var(--purple); padding-left: 16px; }
+
+  /* loop diagram */
+  .loop { background: var(--card); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 22px 20px 16px; }
+  .loop svg { width: 100%; height: auto; display: block; }
+  .loop-caption { font-size: .78rem; color: var(--ink-faint); text-align: center; margin-top: 8px; }
+  .loop text { font-family: Inter, sans-serif; }
+  @keyframes dashmove { to { stroke-dashoffset: -14; } }
+  .loop .missing { animation: dashmove 1.4s linear infinite; }
+  @media (prefers-reduced-motion: reduce) { .loop .missing { animation: none; } }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 72px; }
+  .sect-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+  .tier-tag {
+    font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px;
+  }
+  .tag-now { background: var(--good-bg); color: var(--good); }
+  .tag-next { background: var(--lavender); color: var(--purple); }
+  .tag-later { background: var(--later-bg); color: var(--later); }
+  .tag-no { background: var(--no-bg); color: var(--no); }
+  .sect-sub { color: var(--ink-soft); max-width: 46em; margin-bottom: 28px; }
+
+  .cards { display: grid; gap: 20px; }
+  .cards.three { grid-template-columns: repeat(3, 1fr); }
+  .cards.four { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 900px) { .cards.three { grid-template-columns: 1fr; } }
+  @media (max-width: 720px) { .cards.four { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: var(--shadow); padding: 22px; display: flex; flex-direction: column; gap: 12px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-2px); }
+  .card .icon {
+    width: 42px; height: 42px; border-radius: 10px; background: var(--lavender);
+    display: grid; place-items: center; color: var(--purple); flex: none;
+  }
+  .card .icon svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .card p { font-size: .92rem; color: var(--ink-soft); }
+  .card .viz { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(--lavender-line); }
+  .viz-note { font-size: .7rem; color: var(--ink-faint); letter-spacing: .05em; text-transform: uppercase; margin-top: 8px; }
+
+  /* funnel chart */
+  .funnel { display: flex; flex-direction: column; gap: 7px; }
+  .frow { display: grid; grid-template-columns: 74px 1fr 44px; align-items: center; gap: 10px; font-size: .78rem; }
+  .frow .lbl { color: var(--ink-soft); text-align: right; }
+  .frow .bar { height: 18px; border-radius: 4px; background: linear-gradient(90deg, var(--purple), var(--purple-deep)); opacity: .92; }
+  .frow .pct { font-variant-numeric: tabular-nums; color: var(--ink-faint); }
+
+  /* posting mock (outcome capture) */
+  .mockrow { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; background: var(--paper); }
+  .mockrow .toprow { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: .82rem; }
+  .mockrow .title { font-weight: 600; }
+  .chip {
+    font-size: .7rem; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+    background: var(--lavender); color: var(--purple); white-space: nowrap;
+  }
+  .chip.alert { background: var(--chip-on); color: var(--chip-on-text); }
+  .metrics { display: flex; gap: 6px; flex-wrap: wrap; }
+  .metric { font-size: .72rem; padding: 3px 8px; border-radius: 6px; background: var(--lavender); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+  /* evergreen cycle */
+  .cycle svg { width: 100%; height: auto; display: block; }
+  .cycle text { font-family: Inter, sans-serif; }
+
+  /* timing strip (playbooks) */
+  .timing { display: flex; flex-direction: column; gap: 6px; }
+  .timing .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .timing .d {
+    text-align: center; font-size: .72rem; padding: 8px 0 6px; border-radius: 6px;
+    background: var(--lavender); color: var(--ink-faint); font-weight: 600;
+  }
+  .timing .d.hot { background: var(--chip-on); color: var(--chip-on-text); }
+  .timing .d small { display: block; font-size: .62rem; font-weight: 400; margin-top: 2px; }
+
+  /* search mock */
+  .searchbar { display: flex; align-items: center; gap: 8px; border: 1px solid var(--line); border-radius: 10px; padding: 9px 12px; background: var(--paper); font-size: .85rem; color: var(--ink-faint); }
+  .searchbar svg { width: 16px; height: 16px; stroke: var(--purple); fill: none; stroke-width: 2; stroke-linecap: round; }
+  .searchhits { margin-top: 8px; display: flex; flex-direction: column; gap: 5px; font-size: .78rem; }
+  .searchhits .hit { padding: 6px 10px; border-radius: 6px; background: var(--lavender); color: var(--ink-soft); }
+  .searchhits mark { background: transparent; color: var(--purple); font-weight: 700; }
+
+  /* intent buttons mock */
+  .intents { display: flex; gap: 8px; flex-wrap: wrap; }
+  .intent {
+    display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600;
+    padding: 7px 12px; border-radius: 8px; border: 1px solid var(--lavender-line);
+    background: var(--paper); color: var(--ink);
+  }
+  .intent svg { width: 14px; height: 14px; stroke: var(--purple); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .intent.primary { background: var(--chip-on); color: var(--chip-on-text); border-color: transparent; }
+  .intent.primary svg { stroke: var(--chip-on-text); }
+
+  /* nudge mock */
+  .nudge { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-left: 3px solid var(--later); border-radius: 10px; padding: 10px 12px; background: var(--paper); font-size: .82rem; }
+  .nudge .days-badge { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--later); white-space: nowrap; }
+
+  /* tier 3 rows */
+  .rows { display: flex; flex-direction: column; gap: 12px; }
+  .row {
+    display: grid; grid-template-columns: 42px 1fr auto; gap: 16px; align-items: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px;
+  }
+  @media (max-width: 640px) { .row { grid-template-columns: 42px 1fr; } .row .trigger { grid-column: 2; justify-self: start; } }
+  .row .icon { width: 42px; height: 42px; border-radius: 10px; background: var(--lavender); display: grid; place-items: center; color: var(--purple); }
+  .row .icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .row h3 { font-size: 1.05rem; }
+  .row p { font-size: .88rem; color: var(--ink-soft); }
+  .trigger { font-size: .72rem; font-weight: 600; color: var(--later); background: var(--later-bg); padding: 5px 11px; border-radius: 999px; white-space: nowrap; }
+
+  /* not-building */
+  .no-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 820px) { .no-cards { grid-template-columns: 1fr; } }
+  .no-card { border: 1px dashed var(--line); border-radius: 12px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .no-card h3 { font-size: 1rem; color: var(--ink-soft); }
+  .no-card h3 svg { width: 15px; height: 15px; stroke: var(--no); fill: none; stroke-width: 2.4; stroke-linecap: round; vertical-align: -2px; margin-right: 6px; }
+  .no-card p { font-size: .85rem; color: var(--ink-faint); }
+
+  footer { margin-top: 88px; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--ink-faint); }
+  footer a { color: var(--purple); }
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+  <header>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Vitrina · roadmap · 29 Aug 2026</span>
+        <h1>The shop window learns to look back</h1>
+        <p class="lede">Vitrina already runs the whole trip from mined idea to published post across seven channels. Compared against Typefully, Hypefury, Buffer, and Postiz, exactly one structural gap shows up:</p>
+        <p class="thesis">Vitrina knows what went out — but never learns what happened next.</p>
+      </div>
+      <figure class="loop" role="img" aria-label="Pipeline diagram: mine, pick, draft, schedule, post — with a missing feedback edge back to the start">
+        <svg viewBox="0 0 380 240">
+          <defs>
+            <marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L8,4 L0,8 z" fill="var(--ink-faint)"/>
+            </marker>
+            <marker id="arrp" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+              <path d="M0,0 L8,4 L0,8 z" fill="var(--purple)"/>
+            </marker>
+          </defs>
+          <g font-size="12" font-weight="600">
+            <rect x="10" y="30" width="62" height="30" rx="8" fill="var(--lavender)"/>
+            <text x="41" y="49" text-anchor="middle" fill="var(--ink)">mine</text>
+            <rect x="97" y="30" width="62" height="30" rx="8" fill="var(--lavender)"/>
+            <text x="128" y="49" text-anchor="middle" fill="var(--ink)">pick</text>
+            <rect x="184" y="30" width="62" height="30" rx="8" fill="var(--lavender)"/>
+            <text x="215" y="49" text-anchor="middle" fill="var(--ink)">draft</text>
+            <rect x="271" y="30" width="99" height="30" rx="8" fill="var(--lavender)"/>
+            <text x="320" y="49" text-anchor="middle" fill="var(--ink)">schedule</text>
+            <rect x="271" y="110" width="99" height="30" rx="8" fill="var(--chip-on)"/>
+            <text x="320" y="129" text-anchor="middle" fill="var(--chip-on-text)">post ✓</text>
+          </g>
+          <g stroke="var(--ink-faint)" stroke-width="1.6" fill="none">
+            <line x1="72" y1="45" x2="94" y2="45" marker-end="url(#arr)"/>
+            <line x1="159" y1="45" x2="181" y2="45" marker-end="url(#arr)"/>
+            <line x1="246" y1="45" x2="268" y2="45" marker-end="url(#arr)"/>
+            <line x1="320" y1="60" x2="320" y2="107" marker-end="url(#arr)"/>
+          </g>
+          <path class="missing" d="M 268 130 C 140 130 40 130 40 66" stroke="var(--purple)" stroke-width="2" stroke-dasharray="7 7" fill="none" marker-end="url(#arrp)"/>
+          <text x="150" y="152" text-anchor="middle" font-size="12" font-style="italic" fill="var(--purple)">what happened next?</text>
+          <text x="190" y="205" text-anchor="middle" font-size="11.5" fill="var(--ink-faint)">The dashed edge doesn't exist yet.</text>
+          <text x="190" y="222" text-anchor="middle" font-size="11.5" fill="var(--ink-faint)">Tier 1 is that edge.</text>
+        </svg>
+      </figure>
+    </div>
+  </header>
+
+  <!-- ============ TIER 1 ============ -->
+  <section>
+    <div class="sect-head">
+      <span class="tier-tag tag-now">Tier 1 · build next</span>
+      <h2>Close the feedback loop</h2>
+    </div>
+    <p class="sect-sub">Every serious tool in the space closes this loop; Hypefury's two most-loved features both depend on it. All three ideas below feed on data Vitrina already stores.</p>
+    <div class="cards three">
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 5 4-10 2 5h6"/></svg></div>
+        <h3>Outcome capture</h3>
+        <p>Seven days after a posting, Today grows a "check results" entry. You (or Ezri, via Firecrawl or the HN API) record a small metrics blob on the posting row. One nullable JSON column, one due-date rule.</p>
+        <div class="viz">
+          <div class="mockrow">
+            <div class="toprow">
+              <span class="title">Kingfisher: the boring parts</span>
+              <span class="chip alert">day 7 · check results</span>
+            </div>
+            <div class="metrics">
+              <span class="metric">👁 views</span>
+              <span class="metric">♥ likes</span>
+              <span class="metric">💬 comments</span>
+              <span class="metric">+ followers</span>
+            </div>
+          </div>
+          <div class="viz-note">The Today entry it would add</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg></div>
+        <h3>Analytics screen</h3>
+        <p>Conversion through the pipeline, median time-in-state, posts per week per channel — all derivable from dates already in the database. Once outcomes exist: hit rate by channel, tag, and title pattern.</p>
+        <div class="viz">
+          <div class="funnel">
+            <div class="frow"><span class="lbl">mined</span><div class="bar" style="width:100%"></div><span class="pct">100%</span></div>
+            <div class="frow"><span class="lbl">picked</span><div class="bar" style="width:46%"></div><span class="pct">46%</span></div>
+            <div class="frow"><span class="lbl">drafted</span><div class="bar" style="width:30%"></div><span class="pct">30%</span></div>
+            <div class="frow"><span class="lbl">published</span><div class="bar" style="width:18%"></div><span class="pct">18%</span></div>
+          </div>
+          <div class="viz-note">Illustrative — the screen computes the real numbers</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg></div>
+        <h3>Evergreen recycling</h3>
+        <p>A published card older than six months becomes eligible for a "revive" queue proposing a fresh variation — new ordinal, same or new channel. Proven material, zero schema change. Hypefury's core retention trick.</p>
+        <div class="viz">
+          <div class="cycle" role="img" aria-label="Cycle: published, six months pass, revive queue, new variation">
+            <svg viewBox="0 0 300 96">
+              <g font-size="11" font-weight="600">
+                <rect x="4" y="32" width="80" height="26" rx="7" fill="var(--lavender)"/>
+                <text x="44" y="49" text-anchor="middle" fill="var(--ink)">published</text>
+                <rect x="110" y="32" width="76" height="26" rx="7" fill="var(--later-bg)"/>
+                <text x="148" y="49" text-anchor="middle" fill="var(--later)">+6 months</text>
+                <rect x="212" y="32" width="84" height="26" rx="7" fill="var(--chip-on)"/>
+                <text x="254" y="49" text-anchor="middle" fill="var(--chip-on-text)">revive ↻</text>
+              </g>
+              <g stroke="var(--ink-faint)" stroke-width="1.5" fill="none">
+                <line x1="84" y1="45" x2="107" y2="45" marker-end="url(#arr)"/>
+                <line x1="186" y1="45" x2="209" y2="45" marker-end="url(#arr)"/>
+              </g>
+              <path d="M 254 62 C 254 88 44 88 44 62" stroke="var(--purple)" stroke-width="1.6" stroke-dasharray="5 5" fill="none" marker-end="url(#arrp)"/>
+              <text x="150" y="92" text-anchor="middle" font-size="10" fill="var(--ink-faint)">new variation, ordinal +1</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ TIER 2 ============ -->
+  <section>
+    <div class="sect-head">
+      <span class="tier-tag tag-next">Tier 2 · high value, low drama</span>
+      <h2>Less friction, healthier pool</h2>
+    </div>
+    <p class="sect-sub">Four smaller pieces. Each one removes a paper cut from the daily ritual or keeps the growing card pool navigable.</p>
+    <div class="cards four">
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg></div>
+        <h3>Per-channel playbooks on Today</h3>
+        <p>Best posting window, title conventions, and format quirks rendered on each Today entry — the Medium and HN timing research encoded where it gets used, not in a note nobody reopens.</p>
+        <div class="viz">
+          <div class="timing">
+            <div class="days">
+              <span class="d">Mon</span>
+              <span class="d hot">Tue<small>13–15h</small></span>
+              <span class="d hot">Wed<small>13–15h</small></span>
+              <span class="d">Thu</span>
+              <span class="d">Fri</span>
+              <span class="d">Sat</span>
+              <span class="d">Sun</span>
+            </div>
+          </div>
+          <div class="viz-note">Medium window, from the 29 Aug research</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M10 14L21 3M21 3h-6M21 3v6"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg></div>
+        <h3>Composer deep links</h3>
+        <p>"Copy text" plus a pre-filled intent URL per channel — X web intent, LinkedIn share dialog. Posting stays manual and deliberate; the taps halve.</p>
+        <div class="viz">
+          <div class="intents">
+            <span class="intent primary"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy text</span>
+            <span class="intent"><svg viewBox="0 0 24 24"><path d="M10 14L21 3"/></svg>Open X composer</span>
+            <span class="intent"><svg viewBox="0 0 24 24"><path d="M10 14L21 3"/></svg>Share on LinkedIn</span>
+          </div>
+          <div class="viz-note">The action row it would add to a Today entry</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+        <h3>Full-text search</h3>
+        <p>SQLite FTS5 across titles, pitches, bodies, variation text, and evidence. Tag filtering works at 50 cards; it will not at 500. The index is built into SQLite — no new infrastructure.</p>
+        <div class="viz">
+          <div class="searchbar"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>data feed</div>
+          <div class="searchhits">
+            <div class="hit">Validate a free <mark>data feed</mark> for completeness…</div>
+            <div class="hit">The Broadcom day that killed the speed thesis — <mark>feed</mark> latency…</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div>
+        <h3>Stale-proposal nudges</h3>
+        <p>Picked but undrafted for two weeks surfaces a gentle flag — the same stewardship rule the quest roster uses. A pool where proposals silently age is a pool you stop trusting.</p>
+        <div class="viz">
+          <div class="nudge">
+            <span class="days-badge">17d</span>
+            <span>"A read-write secrets token…" — picked, still undrafted</span>
+          </div>
+          <div class="viz-note">Surfaces on the Picked screen, dismissible</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ TIER 3 ============ -->
+  <section>
+    <div class="sect-head">
+      <span class="tier-tag tag-later">Tier 3 · when the trigger fires</span>
+      <h2>Parked, with named triggers</h2>
+    </div>
+    <p class="sect-sub">Deliberately not scheduled. Each has the condition that un-parks it, so nothing needs re-deciding later.</p>
+    <div class="rows">
+
+      <div class="row">
+        <div class="icon"><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+        <div>
+          <h3>Quick capture from the phone</h3>
+          <p>A share-sheet or Telegram-to-card path. Ezri can already file cards via the API — this makes it a standing convention.</p>
+        </div>
+        <span class="trigger">first idea that dies in a chat</span>
+      </div>
+
+      <div class="row">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.6 3 14.4 0 18M12 3c-3 3.6-3 14.4 0 18"/></svg></div>
+        <div>
+          <h3>New channels</h3>
+          <p>Bluesky, Mastodon, Reddit, a daniliuc.com newsletter. Adding one is cheap after #156 — worth it the day you actually start posting there.</p>
+        </div>
+        <span class="trigger">you post somewhere new twice</span>
+      </div>
+
+      <div class="row">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></div>
+        <div>
+          <h3>Semi-automated publishing</h3>
+          <p>Only for API-friendly channels (blog via git, fediverse if added). Contradicts a standing spec rule today — revisit only if the ritual ever chafes.</p>
+        </div>
+        <span class="trigger">the morning ritual starts to hurt</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ NOT BUILDING ============ -->
+  <section>
+    <div class="sect-head">
+      <span class="tier-tag tag-no">Deliberately not</span>
+      <h2>What Vitrina refuses to become</h2>
+    </div>
+    <p class="sect-sub">The comparison tools carry features that would make Vitrina worse, not rounder.</p>
+    <div class="no-cards">
+      <div class="no-card">
+        <h3><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>Auto-posting</h3>
+        <p>API cost and fragility, against the spec's "nothing posts on Lucian's behalf" — and the manual ritual is the quality gate.</p>
+      </div>
+      <div class="no-card">
+        <h3><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>Teams, approvals, inbox</h3>
+        <p>Buffer and Mixpost features for agencies. Vitrina has one user behind a tailnet.</p>
+      </div>
+      <div class="no-card">
+        <h3><svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>In-app AI drafting</h3>
+        <p>Drafting already has an owner — Ezri, through the same API the app uses. A button would duplicate a working path.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Research: Vitrina spec + open issues · Typefully · Hypefury · Buffer · Postiz · Mixpost — full note in the vault, 29 Aug 2026.</span>
+    <span>Hygiene backlog (#38, #36, #121, #161–187) stays on the normal queue.</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
